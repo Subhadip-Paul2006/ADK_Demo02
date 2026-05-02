@@ -1,72 +1,231 @@
-# Team_Agent.py Docs
+# 🤖 Team Agent Documentation – Part 01 (Weather Agent)
 
-## Define the Tool (`get_weather`)
+## 🚀 Introduction
 
-In ADK, **Tools** are the building blocks that give agents concrete capabilities beyond just text generation. They are typically regular Python functions that perform specific actions, like calling an API, querying a database, or performing calculations.
+Is project mein humne ek basic AI agent system banaya hai using Google ADK.
+Ye agent ek **weather assistant** ki tarah behave karta hai jo user ke query ko samajhkar tool use karta hai aur final answer deta hai.
 
-Our first tool will provide a *mock* weather report. This allows us to focus on the agent structure without needing external API keys yet. Later, you could easily swap this mock function with one that calls a real weather service.
-
-**Key Concept: Docstrings are Crucial\!** The agent's LLM relies heavily on the function's **docstring** to understand:
-
-* `What` the tool does.
-* `When` to use it.
-* `What arguments* it requires (`city: str`).
-* `What information` it returns.
-
-**Best Practice:** Write clear, descriptive, and accurate docstrings for your tools. This is essential for the LLM to use the tool correctly.
+Simple flow:
+👉 User → Agent → Tool → Response
 
 ---
 
-## Define the Agent (`weather_agent`)
+## 🧠 Overall Concept (High-Level Understanding)
 
-Now, let's create the **Agent** itself. An `Agent` in ADK orchestrates the interaction between the user, the LLM, and the available tools.
+Yeh system 4 main components pe based hai:
 
-We configure it with several key parameters:
+1. **Agent (Brain)** → Decision leta hai kya karna hai
+2. **Tool (Worker)** → Actual kaam karta hai (weather fetch karna)
+3. **Session (Memory)** → Conversation yaad rakhta hai
+4. **Runner (Engine)** → Sabko connect karta hai
 
-* `name`: A unique identifier for this agent (e.g., "weather\_agent\_v1").
-* `model`: Specifies which LLM to use (e.g., `MODEL_GEMINI_2_5_FLASH`). We'll start with a specific Gemini model.
-* `description`: A concise summary of the agent's overall purpose. This becomes crucial later when other agents need to decide whether to delegate tasks to *this* agent.
-* `instruction`: Detailed guidance for the LLM on how to behave, its persona, its goals, and specifically *how and when* to utilize its assigned `tools`.
-* `tools`: A list containing the actual Python tool functions the agent is allowed to use (e.g., `[get_weather]`).
-
-**Best Practice:** Provide clear and specific `instruction` prompts. The more detailed the instructions, the better the LLM can understand its role and how to use its tools effectively. Be explicit about error handling if needed.
-
-**Best Practice:** Choose descriptive `name` and `description` values. These are used internally by ADK and are vital for features like automatic delegation (covered later).
+👉 In sabka combination hi ek working AI agent system banata hai
 
 ---
 
-## Setup Runner and Session Service
+## 🤖 Agent (AI Brain)
 
-To manage conversations and execute the agent, we need two more components:
+Agent basically ek intelligent layer hai jo:
 
-* `SessionService`: Responsible for managing conversation history and state for different users and sessions. The `InMemorySessionService` is a simple implementation that stores everything in memory, suitable for testing and simple applications. It keeps track of the messages exchanged. We'll explore state persistence more in Step 4\.
-* `Runner`: The engine that orchestrates the interaction flow. It takes user input, routes it to the appropriate agent, manages calls to the LLM and tools based on the agent's logic, handles session updates via the `SessionService`, and yields events representing the progress of the interaction.
+* User ka question samajhta hai
+* Decide karta hai tool call karna hai ya nahi
+* Final response generate karta hai
 
----
+### 🔥 Important: Instruction
 
-## Interact with the Agent
+Agent ka sabse powerful part hota hai uska **instruction**
 
-We need a way to send messages to our agent and receive its responses. Since LLM calls and tool executions can take time, ADK's `Runner` operates asynchronously.
+👉 Yeh decide karta hai:
 
-We'll define an `async` helper function (`call_agent_async`) that:
+* Kab tool use karna hai
+* Error aaye toh kya bolna hai
+* Output ka tone kya hoga
 
-1. Takes a user query string.
-2. Packages it into the ADK `Content` format.
-3. Calls `runner.run_async`, providing the user/session context and the new message.
-4. Iterates through the **Events** yielded by the runner. Events represent steps in the agent's execution (e.g., tool call requested, tool result received, intermediate LLM thought, final response).
-5. Identifies and prints the **final response** event using `event.is_final_response()`.
-
-**Why `async`?** Interactions with LLMs and potentially tools (like external APIs) are I/O-bound operations. Using `asyncio` allows the program to handle these operations efficiently without blocking execution.
+Simple words:
+👉 Instruction = Agent ka "behavior control system"
 
 ---
 
-## Run the Conversation
-Finally, let's test our setup by sending a few queries to the agent. We wrap our `async` calls in a main `async` function and run it using `await`.
+## 🛠️ Tool (Actual Worker)
 
-Watch the output:
+Tool ek function hota hai jo real-world kaam karta hai.
 
-* See the user queries.
-* Notice the `--- Tool: get_weather called... ---` logs when the agent uses the tool.
-* Observe the agent's final responses, including how it handles the case where weather data isn't available (for Paris).
+👉 Example:
 
+* Weather fetch karna
+* API call karna
+* Data process karna
 
+### 🧠 Important Understanding:
+
+❌ Agent khud sab nahi karta
+✅ Agent → Tool ko bolta hai kaam karne ke liye
+
+👉 Matlab:
+Agent = Manager
+Tool = Worker
+
+---
+
+## 🧠 Session (Memory System)
+
+Session system ek memory bank hai jo:
+
+* User ki previous baatein yaad rakhta hai
+* Context maintain karta hai
+
+### 💡 Why important?
+
+Example:
+User: "Weather in London?"
+User: "How about Paris?"
+
+👉 Second question incomplete hai
+👉 But agent samajh jata hai kyunki memory hai
+
+---
+
+## 🆔 Identifiers (App, User, Session)
+
+System ko track karne ke liye 3 cheeze use hoti hain:
+
+* **App Name** → Project identify karta hai
+* **User ID** → Kaunsa user hai
+* **Session ID** → Kaunsa conversation chal raha hai
+
+👉 Yeh multi-user systems ke liye very important hai
+
+---
+
+## ⚙️ Runner (Main Engine)
+
+Runner system ka sabse important part hai.
+
+👉 Ye kaam karta hai:
+
+* User input receive karta hai
+* Session check karta hai
+* Agent ko pass karta hai
+* Tool execution handle karta hai
+* Final response return karta hai
+
+Simple samajh:
+👉 Runner = “System ka processor / engine”
+
+---
+
+## 🔁 Event-Based Execution (Core Concept)
+
+ADK system directly ek response nahi deta
+👉 Wo **events generate karta hai step-by-step**
+
+### Flow:
+
+1. User query aayi
+2. Agent ne socha
+3. Tool call hua
+4. Result aaya
+5. Final response generate hua
+
+👉 In sab steps ko “events” kehte hain
+
+### ⭐ Final Response
+
+System detect karta hai:
+👉 Kaunsa event final answer hai
+
+Aur wahi user ko show hota hai
+
+---
+
+## 💬 Conversation Flow (Execution Logic)
+
+Jab user question bhejta hai:
+
+1. Query structured format mein convert hoti hai
+2. Runner usse process karta hai
+3. Agent instruction ke basis pe decision leta hai
+4. Agar zarurat ho → tool call hota hai
+5. Tool result return karta hai
+6. Agent final response banata hai
+7. User ko answer milta hai
+
+---
+
+## 🧠 Smart Behavior (Context Understanding)
+
+Agent ek intelligent cheez karta hai:
+
+👉 Previous conversation use karta hai
+
+Isliye:
+
+* Incomplete questions bhi samajh leta hai
+* Natural conversation possible hota hai
+
+---
+
+## 🧪 Testing (Conversation Simulation)
+
+System ko test karne ke liye multiple queries run ki gayi hain:
+
+* Direct question
+* Follow-up question
+* Different city query
+
+👉 Isse verify hota hai:
+
+* Tool working hai
+* Memory working hai
+* Agent reasoning correct hai
+
+---
+
+## 🏗️ Architecture / User Flow
+
+```
+        👤 User
+           ↓
+    💬 Query Input
+           ↓
+    ⚙️ Runner (Engine)
+           ↓
+    🧠 Agent (Decision Making)
+           ↓
+   🛠️ Tool Call (if needed)
+           ↓
+   📦 Tool Result
+           ↓
+    🧠 Agent Response
+           ↓
+    💬 Final Output to User
+```
+
+---
+
+## 🔥 Final Summary (Revision Quick View)
+
+* Agent = Brain
+* Tool = Worker
+* Session = Memory
+* Runner = Engine
+
+👉 Flow:
+User → Runner → Agent → Tool → Agent → User
+
+---
+
+## 💡 Pro Tip (Important for Future)
+
+Yeh sirf starting hai 👇
+
+Aage tum kar sakte ho:
+
+* Multiple agents (Team Agents)
+* Advanced tools (APIs, DB)
+* RAG (knowledge-based answers)
+* Autonomous workflows
+
+👉 Ye foundation tumhare pure AI system ka base banega
+
+---
