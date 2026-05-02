@@ -1,19 +1,19 @@
-# 🤖 Team Agent Documentation – Part 03
+# Team Agent Documentation – Part 03
 
-## 🧠 Adding Memory Allocation & Personalization using Session State
+## Adding Memory Allocation & Personalization using Session State
 
 ---
 
-## 🚀 Introduction
+## Introduction
 
 Ab tak humne ek powerful system build kar liya hai:
 
-* ✔ Single Agent (Weather handling)
-* ✔ Multi-Agent Team (Delegation system)
+* Single Agent (Weather handling)
+* Multi-Agent Team (Delegation system)
 
 Lekin ek fundamental limitation abhi bhi exist karti hai:
 
-👉 **System stateless hai**
+**System stateless hai**
 
 Matlab:
 
@@ -23,7 +23,7 @@ Matlab:
 
 ---
 
-## ❌ Problem Without Memory
+## Problem Without Memory
 
 Without memory:
 
@@ -36,20 +36,20 @@ Example:
 User: *“Set temperature to Fahrenheit”*
 User: *“Weather in London?”*
 
-👉 Without memory → Agent ignore karega preference
-👉 With memory → Agent Fahrenheit use karega
+Without memory → Agent ignore karega preference
+With memory → Agent Fahrenheit use karega
 
 ---
 
-## 🔥 Solution: Session State (Persistent Memory)
+## Solution: Session State (Persistent Memory)
 
 ADK is problem ko solve karta hai using:
 
-👉 **Session State**
+**Session State**
 
 ---
 
-## 🧠 What Exactly is Session State?
+## What Exactly is Session State?
 
 Session State ek:
 
@@ -59,7 +59,7 @@ Session State ek:
 
 ---
 
-### 📦 Structure Conceptually:
+### Structure Conceptually:
 
 Session State looks like:
 
@@ -68,7 +68,7 @@ Session State looks like:
 
 ---
 
-### 🔗 Session Binding
+### Session Binding
 
 Session State tied hota hai:
 
@@ -76,18 +76,18 @@ Session State tied hota hai:
 * User ID
 * Session ID
 
-👉 Matlab:
+Matlab:
 Har user ka alag memory space hota hai
 
 ---
 
-## 🧠 Core Idea
+## Core Idea
 
-👉 Session State = “Short-term memory inside a conversation”
+Session State = “Short-term memory inside a conversation”
 
 ---
 
-## ⚙️ Step 1: Initializing Session with State
+## Step 1: Initializing Session with State
 
 Is step mein do important cheeze hoti hain:
 
@@ -95,7 +95,7 @@ Is step mein do important cheeze hoti hain:
 
 ### 1. New Session Service
 
-👉 Ek fresh session environment create kiya jata hai
+Ek fresh session environment create kiya jata hai
 
 Kyun?
 
@@ -108,11 +108,11 @@ Kyun?
 
 Session create karte time hi:
 
-👉 Initial values define ki jaati hain
+Initial values define ki jaati hain
 
 ---
 
-### 📌 Example:
+### Example:
 
 * User preference:
 
@@ -120,20 +120,20 @@ Session create karte time hi:
 
 ---
 
-### 🧠 Key Insight
+### Key Insight
 
-👉 State sirf runtime pe nahi
-👉 Initialization pe bhi set kiya ja sakta hai
+State sirf runtime pe nahi
+Initialization pe bhi set kiya ja sakta hai
 
 ---
 
-## 🔍 Step 2: Reading & Writing State inside Tools
+## Step 2: Reading & Writing State inside Tools
 
 Yeh step pura system ka **heart** hai.
 
 ---
 
-## 🔥 Key Concept: ToolContext
+## Key Concept: ToolContext
 
 ToolContext ek special object hai jo:
 
@@ -142,7 +142,7 @@ ToolContext ek special object hai jo:
 
 ---
 
-### 📡 What ToolContext Provides?
+### What ToolContext Provides?
 
 ToolContext ke through tool:
 
@@ -151,27 +151,27 @@ ToolContext ke through tool:
 
 ---
 
-### 🧠 Conceptual Flow:
+### Conceptual Flow:
 
 Tool runs → ToolContext milta hai → State access hota hai
 
 ---
 
-## 🔁 State Read Operation
+## State Read Operation
 
 Tool state se data read karta hai:
 
-👉 Example:
+Example:
 
 * user_preference_temperature_unit
 
 ---
 
-### ⚠️ Important Practice
+### Important Practice
 
 Always safe access use karo:
 
-👉 Default value define karo
+Default value define karo
 
 Kyun?
 
@@ -179,30 +179,30 @@ Kyun?
 
 ---
 
-## 🔁 State Write Operation
+## State Write Operation
 
 Tool state update bhi kar sakta hai:
 
-👉 Example:
+Example:
 
 * last_city_checked
 
 ---
 
-### 🧠 Insight
+### Insight
 
-👉 Tools sirf output nahi dete
-👉 Wo system memory bhi modify kar sakte hain
+Tools sirf output nahi dete
+Wo system memory bhi modify kar sakte hain
 
 ---
 
-## ⚙️ Dynamic Behavior via State
+## Dynamic Behavior via State
 
 Yeh step system ko **static se dynamic** banata hai.
 
 ---
 
-### 📌 Example Flow:
+### Example Flow:
 
 1. Tool internal data Celsius mein store karta hai
 2. State check karta hai → user preference
@@ -210,21 +210,21 @@ Yeh step system ko **static se dynamic** banata hai.
 
 ---
 
-### 🧠 Result:
+### Result:
 
-👉 Same tool
-👉 Different output
-👉 Based on memory
+Same tool
+Different output
+Based on memory
 
 ---
 
-## 🤖 Step 3: Root Agent Upgrade (Stateful Agent)
+## Step 3: Root Agent Upgrade (Stateful Agent)
 
 Ab root agent ko upgrade kiya gaya hai:
 
 ---
 
-### 🔥 Enhancements:
+### Enhancements:
 
 1. Stateful tool use karta hai
 2. Sub-agent delegation maintain karta hai
@@ -232,20 +232,20 @@ Ab root agent ko upgrade kiya gaya hai:
 
 ---
 
-## 💾 Key Feature: output_key
+## Key Feature: output_key
 
 Yeh ek **automatic persistence mechanism** hai
 
 ---
 
-### 🧠 What happens internally?
+### What happens internally?
 
 * Agent ka final response capture hota hai
 * Automatically session state mein store hota hai
 
 ---
 
-### 📌 Example:
+### Example:
 
 Key:
 
@@ -257,13 +257,13 @@ Value:
 
 ---
 
-### ⚠️ Important Behavior
+### Important Behavior
 
-👉 Latest response overwrite karega previous value
+Latest response overwrite karega previous value
 
 ---
 
-## 🧠 Combined Intelligence
+## Combined Intelligence
 
 Ab system 3 levels pe kaam kar raha hai:
 
@@ -273,13 +273,13 @@ Ab system 3 levels pe kaam kar raha hai:
 
 ---
 
-## ⚙️ Step 4: Testing the Stateful Flow
+## Step 4: Testing the Stateful Flow
 
 System behavior ko validate karne ke liye structured testing ki gayi hai:
 
 ---
 
-## 🔹 Turn 1: Weather Request (Initial State)
+## Turn 1: Weather Request (Initial State)
 
 * Tool state read karta hai
 * Default preference (Celsius) use hoti hai
@@ -287,24 +287,24 @@ System behavior ko validate karne ke liye structured testing ki gayi hai:
 
 ---
 
-## 🔹 Turn 2: Manual State Modification
+## Turn 2: Manual State Modification
 
 State manually update kiya gaya:
 
-👉 Celsius → Fahrenheit
+Celsius → Fahrenheit
 
 ---
 
-### ⚠️ Critical Concept
+### Critical Concept
 
 Session retrieval se jo object milta hai:
-👉 Wo copy hota hai
+Wo copy hota hai
 
-👉 Actual stored state modify karna padta hai
+Actual stored state modify karna padta hai
 
 ---
 
-## 🔹 Turn 3: Weather Request (After Update)
+## Turn 3: Weather Request (After Update)
 
 * Tool updated state read karta hai
 * Fahrenheit conversion apply hota hai
@@ -312,24 +312,24 @@ Session retrieval se jo object milta hai:
 
 ---
 
-## 🔹 Turn 4: Delegation Check
+## Turn 4: Delegation Check
 
 Greeting query diya gaya
 
-👉 Root agent:
+Root agent:
 
 * Recognize karta hai greeting
 * Greeting agent ko delegate karta hai
 
 ---
 
-## 🔹 Final Step: State Inspection
+## Final Step: State Inspection
 
 Final state verify kiya gaya
 
 ---
 
-### 📦 Expected Contents:
+### Expected Contents:
 
 * user_preference_temperature_unit → Fahrenheit
 * last_weather_report → latest response
@@ -337,85 +337,85 @@ Final state verify kiya gaya
 
 ---
 
-## 🧠 Deep Key Learnings
+## Deep Key Learnings
 
 ---
 
-### 🔥 1. Persistent Context
+### 1. Persistent Context
 
 State ensures:
-👉 Conversation continuity
+Conversation continuity
 
 ---
 
-### 🔥 2. Personalization Layer
+### 2. Personalization Layer
 
 System adapt karta hai:
-👉 User preferences ke according
+User preferences ke according
 
 ---
 
-### 🔥 3. Tool Intelligence Upgrade
+### 3. Tool Intelligence Upgrade
 
 Tool becomes:
-👉 Context-aware
-👉 Dynamic
+Context-aware
+Dynamic
 
 ---
 
-### 🔥 4. Automatic Memory Writing
+### 4. Automatic Memory Writing
 
 output_key simplifies:
-👉 State persistence
+State persistence
 
 ---
 
-### 🔥 5. Separation of Concerns
+### 5. Separation of Concerns
 
 * Agent → Decision
 * Tool → Action
 * State → Memory
 
-👉 Clean architecture
+Clean architecture
 
 ---
 
-## 🏗️ Architecture / User Flow (Detailed)
+## Architecture / User Flow (Detailed)
 
 ```id="flow3d"
-                👤 User
+                User
                    ↓
-            💬 Query Input
+            Query Input
                    ↓
-            ⚙️ Runner Engine
+            Runner Engine
                    ↓
-         🧠 Root Agent (Stateful)
+         Root Agent (Stateful)
                    ↓
-        🔍 Analyze Intent + Context
+        Analyze Intent + Context
                    ↓
-        🔗 Access Session State
+        Access Session State
                    ↓
    ┌───────────────┼───────────────┐
    ↓               ↓               ↓
-👋 Greeting     🌦️ Weather     👋 Farewell
+Greeting        Weather        Farewell
  Agent           Agent           Agent
    ↓               ↓               ↓
-                🛠️ Tool Execution
+                Tool Execution
                    ↓
-        📡 ToolContext Injected
+        ToolContext Injected
                    ↓
-        🔁 Read / Modify State
+        Read / Modify State
                    ↓
-        🧠 Generate Final Output
+        Generate Final Output
                    ↓
-        💾 Auto Save (output_key)
+        Auto Save (output_key)
                    ↓
-            💬 User Response
+            User Response
 ```
 
 ---
 
-## 🔥 Final Summary (Revision Mode)
+## Final Summary (Revision Mode)
 
 * Session State = Persistent Memory
 * ToolContext = Memory Access Layer
@@ -425,7 +425,7 @@ output_key simplifies:
 
 ---
 
-## 💡 Real-World Significance
+## Real-World Significance
 
 Yeh concept directly use hota hai:
 
@@ -436,16 +436,16 @@ Yeh concept directly use hota hai:
 
 ---
 
-## 🚀 Final Insight
+## Final Insight
 
-👉 Ab tumhara system:
+Ab tumhara system:
 
-❌ Simple chatbot nahi hai
-✅ Context-aware, memory-driven AI system hai
+Simple chatbot nahi hai
+Context-aware, memory-driven AI system hai
 
 ---
 
-## 🔮 What’s Next?
+## What’s Next?
 
 Next step mein tum seekhoge:
 
