@@ -1,16 +1,16 @@
-# 🤖 Team Agent Documentation – Part 01 (Weather Agent)
+# Team Agent Documentation – Part 01 (Weather Agent)
 
-## 🚀 Introduction
+## Introduction
 
 Is project mein humne ek basic AI agent system banaya hai using Google ADK.
 Ye agent ek **weather assistant** ki tarah behave karta hai jo user ke query ko samajhkar tool use karta hai aur final answer deta hai.
 
 Simple flow:
-👉 User → Agent → Tool → Response
+User → Agent → Tool → Response
 
 ---
 
-## 🧠 Overall Concept (High-Level Understanding)
+## Overall Concept (High-Level Understanding)
 
 Yeh system 4 main components pe based hai:
 
@@ -19,11 +19,11 @@ Yeh system 4 main components pe based hai:
 3. **Session (Memory)** → Conversation yaad rakhta hai
 4. **Runner (Engine)** → Sabko connect karta hai
 
-👉 In sabka combination hi ek working AI agent system banata hai
+In sabka combination hi ek working AI agent system banata hai
 
 ---
 
-## 🤖 Agent (AI Brain)
+## Agent (AI Brain)
 
 Agent basically ek intelligent layer hai jo:
 
@@ -31,61 +31,61 @@ Agent basically ek intelligent layer hai jo:
 * Decide karta hai tool call karna hai ya nahi
 * Final response generate karta hai
 
-### 🔥 Important: Instruction
+### Important: Instruction
 
 Agent ka sabse powerful part hota hai uska **instruction**
 
-👉 Yeh decide karta hai:
+Yeh decide karta hai:
 
 * Kab tool use karna hai
 * Error aaye toh kya bolna hai
 * Output ka tone kya hoga
 
 Simple words:
-👉 Instruction = Agent ka "behavior control system"
+Instruction = Agent ka "behavior control system"
 
 ---
 
-## 🛠️ Tool (Actual Worker)
+## Tool (Actual Worker)
 
 Tool ek function hota hai jo real-world kaam karta hai.
 
-👉 Example:
+Example:
 
 * Weather fetch karna
 * API call karna
 * Data process karna
 
-### 🧠 Important Understanding:
+### Important Understanding:
 
-❌ Agent khud sab nahi karta
-✅ Agent → Tool ko bolta hai kaam karne ke liye
+Agent khud sab nahi karta
+Agent → Tool ko bolta hai kaam karne ke liye
 
-👉 Matlab:
+Matlab:
 Agent = Manager
 Tool = Worker
 
 ---
 
-## 🧠 Session (Memory System)
+## Session (Memory System)
 
 Session system ek memory bank hai jo:
 
 * User ki previous baatein yaad rakhta hai
 * Context maintain karta hai
 
-### 💡 Why important?
+### Why important?
 
 Example:
 User: "Weather in London?"
 User: "How about Paris?"
 
-👉 Second question incomplete hai
-👉 But agent samajh jata hai kyunki memory hai
+Second question incomplete hai
+But agent samajh jata hai kyunki memory hai
 
 ---
 
-## 🆔 Identifiers (App, User, Session)
+## Identifiers (App, User, Session)
 
 System ko track karne ke liye 3 cheeze use hoti hain:
 
@@ -93,15 +93,15 @@ System ko track karne ke liye 3 cheeze use hoti hain:
 * **User ID** → Kaunsa user hai
 * **Session ID** → Kaunsa conversation chal raha hai
 
-👉 Yeh multi-user systems ke liye very important hai
+Yeh multi-user systems ke liye very important hai
 
 ---
 
-## ⚙️ Runner (Main Engine)
+## Runner (Main Engine)
 
 Runner system ka sabse important part hai.
 
-👉 Ye kaam karta hai:
+Ye kaam karta hai:
 
 * User input receive karta hai
 * Session check karta hai
@@ -110,14 +110,14 @@ Runner system ka sabse important part hai.
 * Final response return karta hai
 
 Simple samajh:
-👉 Runner = “System ka processor / engine”
+Runner = “System ka processor / engine”
 
 ---
 
-## 🔁 Event-Based Execution (Core Concept)
+## Event-Based Execution (Core Concept)
 
 ADK system directly ek response nahi deta
-👉 Wo **events generate karta hai step-by-step**
+Wo **events generate karta hai step-by-step**
 
 ### Flow:
 
@@ -127,18 +127,18 @@ ADK system directly ek response nahi deta
 4. Result aaya
 5. Final response generate hua
 
-👉 In sab steps ko “events” kehte hain
+In sab steps ko “events” kehte hain
 
-### ⭐ Final Response
+### Final Response
 
 System detect karta hai:
-👉 Kaunsa event final answer hai
+Kaunsa event final answer hai
 
 Aur wahi user ko show hota hai
 
 ---
 
-## 💬 Conversation Flow (Execution Logic)
+## Conversation Flow (Execution Logic)
 
 Jab user question bhejta hai:
 
@@ -152,11 +152,11 @@ Jab user question bhejta hai:
 
 ---
 
-## 🧠 Smart Behavior (Context Understanding)
+## Smart Behavior (Context Understanding)
 
 Agent ek intelligent cheez karta hai:
 
-👉 Previous conversation use karta hai
+Previous conversation use karta hai
 
 Isliye:
 
@@ -165,7 +165,7 @@ Isliye:
 
 ---
 
-## 🧪 Testing (Conversation Simulation)
+## Testing (Conversation Simulation)
 
 System ko test karne ke liye multiple queries run ki gayi hain:
 
@@ -173,7 +173,7 @@ System ko test karne ke liye multiple queries run ki gayi hain:
 * Follow-up question
 * Different city query
 
-👉 Isse verify hota hai:
+Isse verify hota hai:
 
 * Tool working hai
 * Memory working hai
@@ -181,43 +181,43 @@ System ko test karne ke liye multiple queries run ki gayi hain:
 
 ---
 
-## 🏗️ Architecture / User Flow
+## Architecture / User Flow
 
 ```
-        👤 User
+        User
            ↓
-    💬 Query Input
+    Query Input
            ↓
-    ⚙️ Runner (Engine)
+    Runner (Engine)
            ↓
-    🧠 Agent (Decision Making)
+    Agent (Decision Making)
            ↓
-   🛠️ Tool Call (if needed)
+   Tool Call (if needed)
            ↓
-   📦 Tool Result
+   Tool Result
            ↓
-    🧠 Agent Response
+    Agent Response
            ↓
-    💬 Final Output to User
+    Final Output to User
 ```
 
 ---
 
-## 🔥 Final Summary (Revision Quick View)
+## Final Summary (Revision Quick View)
 
 * Agent = Brain
 * Tool = Worker
 * Session = Memory
 * Runner = Engine
 
-👉 Flow:
+Flow:
 User → Runner → Agent → Tool → Agent → User
 
 ---
 
-## 💡 Pro Tip (Important for Future)
+## Pro Tip (Important for Future)
 
-Yeh sirf starting hai 👇
+Yeh sirf starting hai
 
 Aage tum kar sakte ho:
 
@@ -226,6 +226,6 @@ Aage tum kar sakte ho:
 * RAG (knowledge-based answers)
 * Autonomous workflows
 
-👉 Ye foundation tumhare pure AI system ka base banega
+Ye foundation tumhare pure AI system ka base banega
 
 ---
