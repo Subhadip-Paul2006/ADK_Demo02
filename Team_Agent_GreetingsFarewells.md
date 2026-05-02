@@ -1,10 +1,10 @@
-# 🤖 Team Agent Documentation – Part 02
+# Team Agent Documentation – Part 02
 
-## 🧠 Building an Agent Team (Delegation for Greetings & Farewells)
+## Building an Agent Team (Delegation for Greetings & Farewells)
 
 ---
 
-## 🚀 Introduction
+## Introduction
 
 Pehle wale step mein humne ek **single agent (weather agent)** banaya tha jo sirf ek kaam karta tha — weather batana.
 
@@ -14,11 +14,11 @@ Lekin real-world AI systems mein:
 
 Isliye yahan hum ek powerful concept introduce karte hain:
 
-🔥 **Agent Team System**
+**Agent Team System**
 
 ---
 
-## 🧠 What is an Agent Team?
+## What is an Agent Team?
 
 Agent Team ka matlab:
 
@@ -27,14 +27,14 @@ Agent Team ka matlab:
 
 ---
 
-### 🧩 Structure:
+### Structure:
 
 * Root Agent → Manager / Coordinator
 * Sub Agents → Specialists
 
 ---
 
-## ❓ Why Agent Team? (Very Important)
+## Why Agent Team? (Very Important)
 
 Single agent approach problem:
 
@@ -44,7 +44,7 @@ Single agent approach problem:
 
 ---
 
-### ✅ Agent Team ke benefits:
+### Agent Team ke benefits:
 
 ### 1. Modularity
 
@@ -64,35 +64,35 @@ Simple tasks ke liye lightweight agents use kar sakte ho
 
 ---
 
-## 🛠️ Step 1: New Tools (Greeting & Farewell)
+## Step 1: New Tools (Greeting & Farewell)
 
 Ab humne 2 naye tools introduce kiye:
 
-### 👋 Greeting Tool
+### Greeting Tool
 
 * User ko hello bolne ke liye
 * Name ho toh personalized greeting
 
-### 👋 Farewell Tool
+### Farewell Tool
 
 * Conversation end karne ke liye
 
 ---
 
-### 🧠 Important Understanding:
+### Important Understanding:
 
 👉 Ye tools simple hain
 👉 But inka use alag agents karenge
 
 ---
 
-## 🤖 Step 2: Sub-Agents Banana
+## Step 2: Sub-Agents Banana
 
 Ab humne 2 naye agents banaye:
 
 ---
 
-### 👋 Greeting Agent
+### Greeting Agent
 
 👉 Kaam:
 
@@ -105,7 +105,7 @@ Ab humne 2 naye agents banaye:
 
 ---
 
-### 👋 Farewell Agent
+### Farewell Agent
 
 👉 Kaam:
 
@@ -117,7 +117,7 @@ Ab humne 2 naye agents banaye:
 
 ---
 
-## 🔥 MOST IMPORTANT: Description Field
+## MOST IMPORTANT: Description Field
 
 👉 Sub-agents ka **description** bahut critical hota hai
 
@@ -128,13 +128,13 @@ Kyun?
 
 ---
 
-### 💡 Simple Samajh:
+### Simple Samajh:
 
 Description = Agent ka “resume”
 
 ---
 
-## 🧠 Step 3: Root Agent Upgrade (Weather Agent v2)
+## Step 3: Root Agent Upgrade (Weather Agent v2)
 
 Ab humne apne main agent ko upgrade kiya:
 
@@ -143,7 +143,7 @@ Ab humne apne main agent ko upgrade kiya:
 
 ---
 
-### 🔥 New Responsibilities:
+### New Responsibilities:
 
 * Weather handle kare
 * Greeting detect kare
@@ -152,7 +152,7 @@ Ab humne apne main agent ko upgrade kiya:
 
 ---
 
-## 🔗 Sub-Agent Linking
+## Sub-Agent Linking
 
 Root agent ko sub-agents diye gaye:
 
@@ -161,9 +161,9 @@ Root agent ko sub-agents diye gaye:
 
 ---
 
-## ⚡ Core Concept: Automatic Delegation
+## Core Concept: Automatic Delegation
 
-Ye sabse powerful concept hai 👇
+Ye sabse powerful concept hai
 
 👉 Jab user query aati hai:
 
@@ -176,7 +176,7 @@ Ye sabse powerful concept hai 👇
 
 ---
 
-### 💥 Example:
+### Example:
 
 User: "Hello bro"
 
@@ -190,7 +190,7 @@ User: "Hello bro"
 
 ---
 
-## 🔁 Delegation Flow
+## Delegation Flow
 
 👉 Step-by-step:
 
@@ -204,7 +204,7 @@ User: "Hello bro"
 
 ---
 
-## 🧠 Decision Making Logic
+## Decision Making Logic
 
 Root agent 3 cheeze dekhta hai:
 
@@ -216,7 +216,7 @@ Root agent 3 cheeze dekhta hai:
 
 ---
 
-## 🧪 Testing the Agent Team
+## Testing the Agent Team
 
 System ko test karne ke liye 3 types ke queries use kiye:
 
@@ -243,7 +243,7 @@ Farewell agent handle kare
 
 ---
 
-## 🔍 Output Observation
+## Output Observation
 
 Agar system sahi kaam kar raha hai:
 
@@ -252,37 +252,37 @@ Agar system sahi kaam kar raha hai:
 * Farewell → goodbye tool call
 
 👉 Isse confirm hota hai:
-✅ Delegation working
-✅ Agent team working
+Delegation working
+Agent team working
 
 ---
 
-## 🏗️ Architecture / User Flow
+## Architecture / User Flow
 
 ```id="flow2"
-           👤 User
+           User
               ↓
-        💬 Query Input
+        Query Input
               ↓
-        ⚙️ Root Agent (Manager)
+        Root Agent (Manager)
               ↓
     ┌─────────┼─────────┐
     ↓         ↓         ↓
-👋 Greeting  🌦️ Weather  👋 Farewell
+Greeting  Weather  Farewell
  Agent        Agent        Agent
     ↓         ↓         ↓
   Tool      Tool      Tool
     ↓         ↓         ↓
     └─────────┼─────────┘
               ↓
-        🧠 Response Merge
+        Response Merge
               ↓
-        💬 Final Output
+        Final Output
 ```
 
 ---
 
-## 🔥 Final Summary (Quick Revision)
+## Final Summary (Quick Revision)
 
 * Multiple agents = Agent Team
 * Root agent = Decision maker
@@ -292,7 +292,7 @@ Agar system sahi kaam kar raha hai:
 
 ---
 
-## 💡 Pro Insight (Very Important for Hackathon)
+## Pro Insight (Very Important for Hackathon)
 
 Ye concept directly use hota hai:
 
@@ -302,11 +302,11 @@ Ye concept directly use hota hai:
 * Autonomous workflows
 
 👉 Agar tum isko samajh gaye:
-You are not beginner anymore 😏🔥
+You are not beginner anymore
 
 ---
 
-## 🚀 What’s Next?
+## What’s Next?
 
 Next step mein tum seekhoge:
 
